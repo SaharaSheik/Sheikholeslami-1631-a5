@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="859.0" prefWidth="750.0" style="-fx-background-color: #42A5F5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventoryListPageController">
+   <children>
+      <Label layoutX="190.0" layoutY="38.0" text="Inventory Tracker App" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="itemName" layoutX="223.0" layoutY="107.0" prefHeight="25.0" prefWidth="317.0" promptText="Enter Item Name">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="itemSerialNumber" layoutX="223.0" layoutY="163.0" prefHeight="25.0" prefWidth="317.0" promptText="Enter Item Serial Number">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="ItemValue" layoutX="223.0" layoutY="215.0" prefHeight="25.0" prefWidth="317.0" promptText="Enter Item Value">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="71.0" fitWidth="82.0" layoutX="347.0" layoutY="263.0" onMouseClicked="#addItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/baseline_add_circle_outline_white_48dp.png" />
+         </image>
+      </ImageView>
+      <Line endX="196.66668701171875" layoutX="319.0" layoutY="343.0" startX="-72.0" stroke="#fff9f9" />
+      <TableView layoutX="78.0" layoutY="383.0" prefHeight="293.0" prefWidth="629.0">
+        <columns>
+          <TableColumn prefWidth="210.0" text="Value" />
+          <TableColumn prefWidth="210.0" text="Serial Number " />
+            <TableColumn prefWidth="210.0" text="Name" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="104.0" layoutY="713.0" onMouseClicked="#editItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/baseline_edit_white_48dp.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="576.0" layoutY="713.0" onMouseClicked="#saveItems" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/baseline_favorite_border_white_48dp.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="411.0" layoutY="713.0" onMouseClicked="#deleteItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/baseline_remove_circle_outline_white_48dp.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="259.0" layoutY="713.0" onMouseClicked="#searchItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/baseline_search_white_48dp.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="114.0" layoutY="796.0" text="Edit Item" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="257.0" layoutY="796.0" text="Search Item" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="410.0" layoutY="796.0" text="Delete Item" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="578.0" layoutY="796.0" text="Save Items" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
