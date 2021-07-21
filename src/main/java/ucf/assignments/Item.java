@@ -6,13 +6,12 @@ public class Item  implements Serializable {
 
     String name;
     String serialNumber;
-    Double Value;
+    double Value;
 
-    public Item(String name, String serialNumber, Double value) {
-        this.name = name;
-        this.serialNumber = serialNumber;
-        Value = value;
+    public Item() {
+
     }
+
 
     public String getName() {
         return name;
@@ -30,11 +29,11 @@ public class Item  implements Serializable {
         this.serialNumber = serialNumber;
     }
 
-    public Double getValue() {
+    public double getValue() {
         return Value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(double value) {
         Value = value;
     }
 }

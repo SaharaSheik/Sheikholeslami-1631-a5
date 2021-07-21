@@ -27,7 +27,7 @@
             <Font name="Century Gothic Bold" size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="ItemValue" layoutX="223.0" layoutY="215.0" prefHeight="25.0" prefWidth="317.0" promptText="Enter Item Value">
+      <TextField fx:id="itemValue" layoutX="223.0" layoutY="215.0" prefHeight="25.0" prefWidth="317.0" promptText="Enter Item Value">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
          </font>
