@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="859.0" prefWidth="750.0" style="-fx-background-color: #42A5F5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventoryListPageController">
    <children>
       <Label layoutX="190.0" layoutY="38.0" text="Inventory Tracker App" textFill="WHITE">
@@ -39,7 +38,7 @@
          </image>
       </ImageView>
       <Line endX="196.66668701171875" layoutX="319.0" layoutY="343.0" startX="-72.0" stroke="#fff9f9" />
-      <TableView layoutX="78.0" layoutY="383.0" prefHeight="293.0" prefWidth="629.0">
+      <TableView fx:id="itemTableView" layoutX="78.0" layoutY="383.0" prefHeight="293.0" prefWidth="629.0">
         <columns>
           <TableColumn prefWidth="210.0" text="Value" />
           <TableColumn prefWidth="210.0" text="Serial Number " />

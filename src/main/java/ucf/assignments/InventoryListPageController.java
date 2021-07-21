@@ -5,11 +5,37 @@ package ucf.assignments;
  *  Copyright 2021 first_name last_name
  */
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
-public class InventoryListPageController  implements Initializable {
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class InventoryListPageController implements Initializable {
+
+    @FXML
+    private TextField itemName ;
+    @FXML
+    private TextField itemSerialNumber;
+    @FXML
+    private TextField ItemValue;
+
+    @FXML
+    private TableView<Item> itemTableView ;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        List<Item> items = loadItems();
+        if(items != null){
+            itemTableView.getItems().addAll(items);
+        }
+    }
 
     public void addItem(MouseEvent mouseEvent) {
     }
@@ -37,5 +63,21 @@ public class InventoryListPageController  implements Initializable {
         alert.setTitle(title);
         alert.setContentText(text);
         alert.showAndWait();
+    }
+
+    public List<Item> loadItems() {
+        try {
+            FileInputStream fi = new FileInputStream("Database/items");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            // Read objects
+            List<Item> items = (List<Item>) oi.readObject();
+            oi.close();
+            fi.close();
+
+            return items;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
