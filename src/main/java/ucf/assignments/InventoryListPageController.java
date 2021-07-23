@@ -6,11 +6,16 @@ package ucf.assignments;
  */
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -128,9 +133,9 @@ public class InventoryListPageController implements Initializable {
         return true;
     }
 
-    public boolean itemSerialNumberIsUniqueChecker(String serialNumber){
-
-        if ()
+    public boolean itemSerialNumberIsUniqueChecker(String serialNumber, TableView<Item> itemTableView){
+        for (int i=0; i<itemTableView.getColumns().size(); i++)
+        if (itemTableView.)
         return true;
     }
     public void searchItem(MouseEvent mouseEvent) {
@@ -139,7 +144,27 @@ public class InventoryListPageController implements Initializable {
     public void deleteItem(MouseEvent mouseEvent) {
     }
 
-    public void editItem(MouseEvent mouseEvent) {
+    public void editItem(MouseEvent mouseEvent) throws IOException {
+
+        Item item = itemTableView.getSelectionModel().getSelectedItem();
+        if(item == null) return;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditItemPage.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+
+        EditItemPageController controller = fxmlLoader.getController();
+        controller.setItem(item);
+
+        Stage stage = new Stage();
+        //stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Edit Item Page");
+        stage.setResizable(false);
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+
+        itemListView.refresh();
+        displayItem.setText(item.getItemDescription(());
     }
 
     public void saveItems(MouseEvent mouseEvent) {

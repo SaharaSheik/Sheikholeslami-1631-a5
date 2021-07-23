@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,52 +37,46 @@
          </image>
       </ImageView>
       <Line endX="196.66668701171875" layoutX="319.0" layoutY="343.0" startX="-72.0" stroke="#fff9f9" />
-      <TableView fx:id="itemTableView" layoutX="78.0" layoutY="383.0" prefHeight="293.0" prefWidth="629.0">
-        <columns>
-          <TableColumn prefWidth="210.0" text="Value" />
-          <TableColumn prefWidth="210.0" text="Serial Number " />
-            <TableColumn prefWidth="210.0" text="Name" />
-        </columns>
-      </TableView>
-      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="104.0" layoutY="713.0" onMouseClicked="#editItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="44.0" layoutY="713.0" onMouseClicked="#editItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/baseline_edit_white_48dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="576.0" layoutY="713.0" onMouseClicked="#saveItems" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="619.0" layoutY="713.0" onMouseClicked="#saveItems" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/baseline_favorite_border_white_48dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="411.0" layoutY="713.0" onMouseClicked="#deleteItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="351.0" layoutY="713.0" onMouseClicked="#deleteItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/baseline_remove_circle_outline_white_48dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="259.0" layoutY="713.0" onMouseClicked="#searchItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="199.0" layoutY="713.0" onMouseClicked="#searchItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/baseline_search_white_48dp.png" />
          </image>
       </ImageView>
-      <Label layoutX="114.0" layoutY="796.0" text="Edit Item" textFill="WHITE">
+      <Label layoutX="54.0" layoutY="796.0" text="Edit Item" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="257.0" layoutY="796.0" text="Search Item" textFill="WHITE">
+      <Label layoutX="197.0" layoutY="796.0" text="Search Item" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="410.0" layoutY="796.0" text="Delete Item" textFill="WHITE">
+      <Label layoutX="350.0" layoutY="796.0" text="Delete Item" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="796.0" text="Save Items" textFill="WHITE">
+      <Label layoutX="621.0" layoutY="796.0" text="Save Items" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
       </Label>
+      <ListView fx:id="itemListView" layoutX="101.0" layoutY="364.0" prefHeight="337.0" prefWidth="559.0" />
    </children>
 </AnchorPane>
