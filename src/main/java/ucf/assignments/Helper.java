@@ -6,8 +6,11 @@ package ucf.assignments;
  */
 import javafx.scene.control.Alert;
 
+// helper functions
 
     public class Helper {
+
+        // show error message
 
         public static void showErrorAlert(String title, String text){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -15,6 +18,8 @@ import javafx.scene.control.Alert;
             alert.setContentText(text);
             alert.showAndWait();
         }
+
+        // show sucess messages
         public static void showSuccessAlert(String title, String text){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(title);
@@ -22,6 +27,7 @@ import javafx.scene.control.Alert;
             alert.showAndWait();
         }
 
+        // item NameChecker checks if the item description  is less than 2 and over 256
         public static boolean itemNameChecker (String Name){
             if (Name.length() > 256 || Name.length() < 2){
                 return false;
@@ -29,12 +35,17 @@ import javafx.scene.control.Alert;
             return true;
         }
 
+        // checks if the serial number is exactly 10 chars
+
         public static boolean itemSerialNumberLengthChecker (String serialNumber){
             if (serialNumber.length() != 10){
                 return false;
             }
             return true;
         }
+
+
+        // checks if serial number is alphanumerical
 
         public static boolean itemSerialNumberCharAndDigitChecker (String serialNumber){
 

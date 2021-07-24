@@ -1,12 +1,12 @@
-ucf/assignments/Helper.java
- ucf.assignments.Helper
+ucf/assignments/InventoryTrackerMain.java
+ ucf.assignments.InventoryTrackerMain
 ucf/assignments/Item.java
  ucf.assignments.Item
+ucf/assignments/Helper.java
+ ucf.assignments.Helper
 ucf/assignments/EditItemPageController.java
  ucf.assignments.EditItemPageController
 ucf/assignments/InventoryListPageController.java
  ucf.assignments.InventoryListPageController
  ucf.assignments.InventoryListPageController$1
  ucf.assignments.InventoryListPageController$2
-ucf/assignments/InventoryTrackerMain.java
- ucf.assignments.InventoryTrackerMain

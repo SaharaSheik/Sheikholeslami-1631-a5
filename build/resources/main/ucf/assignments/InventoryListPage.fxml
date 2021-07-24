@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,7 +35,7 @@
             <Font name="Century Gothic Bold" size="20.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="71.0" fitWidth="82.0" layoutX="537.0" layoutY="192.0" onMouseClicked="#addItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="71.0" fitWidth="82.0" layoutX="538.0" layoutY="147.0" onMouseClicked="#addItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/baseline_add_circle_outline_white_48dp.png" />
          </image>
@@ -88,6 +89,9 @@
             <TableColumn fx:id="colSerial" prefWidth="342.0" text="Serial Number" />
             <TableColumn fx:id="colValue" minWidth="0.0" prefWidth="151.0" text="Value" />
          </columns>
+         <effect>
+            <Glow />
+         </effect>
       </TableView>
       <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="620.0" layoutY="713.0" onMouseClicked="#loadItems" pickOnBounds="true" preserveRatio="true">
          <image>

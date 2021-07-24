@@ -29,6 +29,7 @@ public class EditItemPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
     public void setItem(InventoryListPageController parent, Item item){
         this.parent = parent;
         this.item = item;
@@ -39,58 +40,66 @@ public class EditItemPageController implements Initializable {
     @FXML
 
     public void updateItem() {
+
+        // trim the text to check for requirements of a item description
+
         String description = itemName.getText().trim();
+
         if(description.isEmpty()){
             Helper.showErrorAlert("Error", "Please enter item name.");
             return;
         }
+
         //check length is more than 256 length
         if(!Helper.itemNameChecker(description)){
-            Helper.showErrorAlert("Error", "Min description length is 2 \n and Max description length is 256.");
+            Helper.showErrorAlert("Error", "Min description length should be 2 \nand Max description length should be 256.");
             return;
         }
 
         String serialNumber = itemSerialNumber.getText().trim();
 
         if(serialNumber.isEmpty()){
-            Helper.showErrorAlert("Error", "Please enter item name.");
+            Helper.showErrorAlert("Error", "Please enter a valid serial number.");
             return;
         }
 
-//        if(!itemSerialNumberLengthChecker(serialNumber)){
-//            showErrorAlert("Error", "Serial Number needs to contain 10 Characters.");
-//            return;
-//        }
+       if(!Helper.itemSerialNumberLengthChecker(serialNumber)){
+           Helper.showErrorAlert("Error", "Serial Number needs to contain 10 Characters.");
+        return;
+     }
 
         if(!Helper.itemSerialNumberCharAndDigitChecker (serialNumber)){
             Helper.showErrorAlert("Error", "Serial Number shall be Alphanumeric.");
             return;
         }
 
-        String value_str = itemValue.getText().trim();
-        if(value_str.isEmpty()){
+        String valueString = itemValue.getText().trim();
+
+        if(valueString.isEmpty()){
             Helper.showErrorAlert("Error", "Please enter value.");
             return;
         }
+
         double value = 0;
         try{
-            value = Double.parseDouble(value_str);
+            value = Double.parseDouble(valueString);
             if(value <= 0){
-                Helper.showErrorAlert("Error", "Please enter value over zero.");
+                Helper.showErrorAlert("Error", "Please enter a value greater than zero.");
                 return;
             }
         }catch (NumberFormatException e){
-            Helper.showErrorAlert("Error", "You have to enter numerical values.");
+            Helper.showErrorAlert("Error", "You have to enter a numerical value.");
             return;
         }
-        Item updated_item = new Item();
-        updated_item.setName(description);
-        updated_item.setSerialNumber(serialNumber);
-        updated_item.setValue(value);
 
-        //check same item
-        if(!updated_item.getSerialNumber().equals(item.getSerialNumber()) && parent.getItems().contains(updated_item)){
-            Helper.showErrorAlert("Error", "Same serial number is existing now...");
+        Item updatedItem = new Item();
+        updatedItem.setName(description);
+        updatedItem.setSerialNumber(serialNumber);
+        updatedItem.setValue(value);
+
+        //check if the modified serial number in the edit screen duplicates any of the previously entered serial number
+        if(!updatedItem.getSerialNumber().equals(item.getSerialNumber()) && parent.getItems().contains(updatedItem)){
+            Helper.showErrorAlert("Error", "Duplicate serial number was entered.\nPlease enter a unique Serial Number");
             return;
         }
 
