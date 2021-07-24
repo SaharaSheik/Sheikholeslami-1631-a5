@@ -31,10 +31,18 @@ How to run the Inventory Tracker Application
     - Value
   - Once the type of search is selecting using the radio buttons, user can enter their search key in the searchkey text box
   - The search feature is dynamic and will display items as the user types their search keys
-  - If user enters a key that does not exist, the screen will remain blank
-
+  - If user enters a key that does not exist, the screen will remain blank.
 - Saving the Items:
   -
   - This application supports save items as 3 file types (TSV, Json, Html).
-  - User 
-- User can load items from file by clicking "load items" button.
+  - Steps to save a file
+      - User can click on the Save Items "heart" image at the bottom of the Application.
+      - User should pick which extension they would like to save their file as (TSV, Json, Html)
+      - Type a name for the file
+      - Choose where they would like the file to be uploaded
+- Loading Items:
+  -
+  - User can load items from file by clicking "load items" image at the bottom of the Application.
+  - User then chooses the file extension from the file chooser menu.
+  - User then finds the file and selects the file they would like to open
+- 
