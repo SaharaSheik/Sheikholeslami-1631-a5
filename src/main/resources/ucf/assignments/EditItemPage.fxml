@@ -8,24 +8,24 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane onMouseClicked="#saveItem" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #42A5F5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.EditItemPageController">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #42A5F5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.EditItemPageController">
    <children>
       <TextField fx:id="itemName" layoutX="69.0" layoutY="61.0" prefHeight="25.0" prefWidth="261.0" promptText="Edit Item Name">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font>
       </TextField>
-      <TextField layoutX="69.0" layoutY="132.0" prefHeight="25.0" prefWidth="261.0" promptText="Edit Item Serial Number">
+      <TextField fx:id="itemSerialNumber" layoutX="69.0" layoutY="132.0" prefHeight="25.0" prefWidth="261.0" promptText="Edit Item Serial Number">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font>
       </TextField>
-      <TextField layoutX="69.0" layoutY="200.0" prefHeight="25.0" prefWidth="261.0" promptText="Edit Item Value">
+      <TextField fx:id="itemValue" layoutX="69.0" layoutY="200.0" prefHeight="25.0" prefWidth="261.0" promptText="Edit Item Value">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="86.0" fitWidth="89.0" layoutX="157.0" layoutY="258.0" onMouseClicked="#saveItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="86.0" fitWidth="89.0" layoutX="157.0" layoutY="258.0" onMouseClicked="#updateItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/baseline_favorite_border_white_48dp.png" />
          </image>
