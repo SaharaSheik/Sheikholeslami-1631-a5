@@ -24,6 +24,11 @@ public class InventoryTrackerMain extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        // parent root is the Inventort List Page
+        //create a new scene
+        //attach the root to the scene
+
+
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("InventoryListPage.fxml")));
             Scene scene = new Scene(root);

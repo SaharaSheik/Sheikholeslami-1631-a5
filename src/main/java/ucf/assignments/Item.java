@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 public class Item  implements Serializable {
 
+    // each item object will have 3 fields, an item name, serial number, value
+
+
     String name;
     String serialNumber;
     double Value;
@@ -22,27 +25,37 @@ public class Item  implements Serializable {
     }
 
     public void setName(String name) {
+
+        // use keyword this. to set the itemName from InventoryPage GUI
+
         this.name = name;
     }
 
     public String getSerialNumber() {
+
         return serialNumber;
     }
 
     public void setSerialNumber(String serialNumber) {
+        // use keyword this. to set the itemSerialNumber from InventoryPage GUI
+
         this.serialNumber = serialNumber;
     }
 
     public double getValue() {
+
         return Value;
     }
 
     public void setValue(double value) {
+        // use keyword this. to set the itemValue from InventoryPage GUI
+
         Value = value;
     }
 
     @Override
     public boolean equals(Object obj) {
+        // this function will check to see if the new item has duplicated serial numbers
         if(obj == null)
             return false;
 
@@ -51,7 +64,7 @@ public class Item  implements Serializable {
 
     @Override
     public String toString(){
-        return "Name: " + name + "\n" + "Serial Number: " + serialNumber + "\n" + "Value: " + "$" + Value;
+        return "Name: " + name + "\t" + "Serial Number: " + serialNumber + "\t" + "Value: " + "$" + Value;
     }
 }
 

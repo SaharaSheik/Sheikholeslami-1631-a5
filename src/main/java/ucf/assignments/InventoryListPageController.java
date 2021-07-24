@@ -51,6 +51,7 @@ public class InventoryListPageController implements Initializable {
 
     @FXML
     private TableView<Item> itemListView ;
+
     @FXML private TableColumn<Item, String> colName;
     @FXML private TableColumn<Item, String> colSerial;
     @FXML private TableColumn<Item, Double> colValue;
@@ -69,30 +70,38 @@ public class InventoryListPageController implements Initializable {
     private SortedList<Item> sortableData;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
         //add listener for dynamic search
         searchItem.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             filter();
         });
     }
+
     //initialize table view
     private void initTable(){
+
+        //setting each col properties
+
         colName.setCellValueFactory(new PropertyValueFactory<Item, String>("Name"));
         colSerial.setCellValueFactory(new PropertyValueFactory<Item, String>("SerialNumber"));
         colValue.setCellValueFactory(new PropertyValueFactory<Item, Double>("Value"));
+
+
 
         dataList = FXCollections.observableArrayList();
         filteredList = new FilteredList<>(dataList, p -> true);
         sortableData = new SortedList<>(filteredList);
         itemListView.setItems(sortableData);
         sortableData.comparatorProperty().bind(itemListView.comparatorProperty());
-        filteredList.addListener((Observable o) -> {
+        filteredList.addListener((Observable observable) -> {
             Platform.runLater(() -> {
 
             });
         });
     }
+
+
     @FXML
     public void addItem() {
         String description = itemName.getText().trim();
@@ -100,104 +109,140 @@ public class InventoryListPageController implements Initializable {
             Helper.showErrorAlert("Error", "Please enter item name.");
             return;
         }
-        //check length is more than 256 length
+        //check length is less than 2 and more than 256 length
         if(!Helper.itemNameChecker(description)){
-            Helper.showErrorAlert("Error", "Min description length is 2 \n and Max description length is 256.");
+            Helper.showErrorAlert("Error", "Min description length is 2\nand Max description length is 256.");
             return;
         }
 
         String serialNumber = itemSerialNumber.getText().trim();
+
 
         if(serialNumber.isEmpty()){
             Helper.showErrorAlert("Error", "Please enter item name.");
             return;
         }
 
+        // check if serial number is 10 chars length
         if(!Helper.itemSerialNumberLengthChecker(serialNumber)){
             Helper.showErrorAlert("Error", "Serial Number needs to contain 10 Characters.");
             return;
         }
 
+        //check if serial number is alphanumerical
         if(!Helper.itemSerialNumberCharAndDigitChecker (serialNumber)){
             Helper.showErrorAlert("Error", "Serial Number shall be Alphanumeric.");
             return;
         }
 
-        String value_str = itemValue.getText().trim();
-        if(value_str.isEmpty()){
+        //if value is nor entered - show an error
+        String valueString = itemValue.getText().trim();
+        if(valueString.isEmpty()){
             Helper.showErrorAlert("Error", "Please enter value.");
             return;
         }
         double value = 0;
+
+        // try ParseDouble to make sure the value is of type double
         try{
-            value = Double.parseDouble(value_str);
+            value = Double.parseDouble(valueString);
+
+            //if value is Double parsable but ==0 or <0 then show an error
             if(value <= 0){
-                Helper.showErrorAlert("Error", "Please enter value over zero.");
+                Helper.showErrorAlert("Error", "Please enter value greater than zero.");
                 return;
             }
         }catch (NumberFormatException e){
-            Helper.showErrorAlert("Error", "You have to enter numerical values.");
+            Helper.showErrorAlert("Error", "Please enter a numerical value.");
             return;
         }
+        //set the new item
         Item item = new Item();
         item.setName(description);
         item.setSerialNumber(serialNumber);
         item.setValue(value);
 
-        //check same item
+        //check if we have the same serial number
         if(dataList.contains(item)){
-            Helper.showErrorAlert("Error", "Same serial number is existing now...");
+            Helper.showErrorAlert("Error", "You have entered a duplicate Serial Number.\nPlease enter a unique Serial Number");
             return;
         }
-        //check item list capacity
+        //check item list capacity is full
         if(dataList.size() >= 100){
-            Helper.showErrorAlert("Error", "Max capacity is 100.\nYou can not add anymore from now.");
+            Helper.showErrorAlert("Error", "Max capacity is 100.\nYou can not add anymore inventory items.");
             return;
         }
+
+        // if all is OK add the new item
         dataList.add(item);
 
-        //ready to enter new item
+        //clear the fields so its ready to enter new item
         itemName.setText("");
         itemSerialNumber.setText("");
         itemValue.setText("");
     }
 
+
+    // show the filtered results
+
     private void filter(){
+
         final String searchKey = searchItem.getText().toString().trim();
+
         filteredList.setPredicate(model -> {
+
+            // if nothing in the searchKey filed show everything
             if(searchKey.isEmpty()){
                 return true;
             }
+
+            //if nameRadio button is selection look for the matching names
+            // show nothing if as we type the value does not match
+
             if(nameRadio.isSelected()){
                 if(!model.getName().trim().toLowerCase().startsWith(searchKey)){
                     return false;
                 }
+
+                //if serialRadio button is selection look for the matching serials
+                // show nothing if as we type the value does not match
             }else if(serialRadio.isSelected()){
                 if(!model.getSerialNumber().trim().toLowerCase().startsWith(searchKey)){
                     return false;
                 }
+
+                //if ValueRadio button is selection look for the matching values
+                // show nothing if as we type the value does not match
             }else if(valueRadio.isSelected()){
                 if(!String.valueOf(model.getValue()).startsWith(searchKey)){
                     return false;
                 }
             }
+            // show the matched if we pass the items above
             return true;
         });
     }
 
     @FXML
+    //delete item
     public void deleteItem() {
+
+        // get the item that was selected in the list
         Item item = itemListView.getSelectionModel().getSelectedItem();
-        if(item == null) return;
-        //bufferList.remove(item);
+       // make sure an item  is selected
+        if(item == null)
+            return;
         dataList.remove(item);
     }
 
     @FXML
+
+    // opening a new window for the edit item page
     public void editItem() throws IOException {
 
         Item item = itemListView.getSelectionModel().getSelectedItem();
-        if(item == null) return;
+        if(item == null)
+            return;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditItemPage.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -206,8 +251,7 @@ public class InventoryListPageController implements Initializable {
         controller.setItem(this, item);
 
         Stage stage = new Stage();
-        //stage.initModality(Modality.APPLICATION_MODAL);
-        //stage.initStyle(StageStyle.UNDECORATED);
+
         stage.setTitle("Edit Item Page");
         stage.setResizable(false);
         stage.setScene(new Scene(root1));
@@ -217,12 +261,18 @@ public class InventoryListPageController implements Initializable {
     }
 
     @FXML
+    // save function
+
     public void saveItems() {
-        if(dataList == null || dataList.isEmpty()) return;
+        // if no item to be saved then just return
+        if(dataList == null || dataList.isEmpty())
+            return;
 
         try{
             FileChooser fileChooser = new FileChooser();
-            // Set extension filter
+
+            // Set extension filters for json, txt and html
+
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("Json", "*.json"),
                     new FileChooser.ExtensionFilter("TSV", "*.txt"),
@@ -231,25 +281,33 @@ public class InventoryListPageController implements Initializable {
 
             // Show open file dialog
             File file = fileChooser.showSaveDialog(itemName.getScene().getWindow());
+
             if (file != null) {
+                // get the option the user has chosen
                 String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0);
+
+                // handle Json alert messages
                 if(extension.equals("*.json")){
                     if(saveJson(file)){
-                        Helper.showSuccessAlert("Success","Success to save items");
+                        Helper.showSuccessAlert("Success","Inventory was successfully saved to a Json file");
                     }else{
-                        Helper.showErrorAlert("Error","Fail to save items");
+                        Helper.showErrorAlert("Error","Failed to save items in Json a Json file");
                     }
+
+                    // handle txt alert messages
                 }else if(extension.equals("*.txt")){
                     if(saveTSV(file)){
-                        Helper.showSuccessAlert("Success","Success to save items");
+                        Helper.showSuccessAlert("Success","Inventory was successfully saved to a txt file");
                     }else{
-                        Helper.showErrorAlert("Error","Fail to save items");
+                        Helper.showErrorAlert("Error","Failed to save items in Json a txt file");
                     }
+
+                    // handle html alert messages
                 }else if(extension.equals("*.html")){
                     if(saveHtml(file)){
-                        Helper.showSuccessAlert("Success","Success to save items");
+                        Helper.showSuccessAlert("Success","Inventory was successfully saved to a html file");
                     }else{
-                        Helper.showErrorAlert("Error","Fail to save items");
+                        Helper.showErrorAlert("Error","Failed to save items in a html file");
                     }
                 }
             }
@@ -262,6 +320,7 @@ public class InventoryListPageController implements Initializable {
         return this.dataList;
     }
 
+    //create a Gson file
     private boolean saveJson(File file){
         try{
             Gson gson = new Gson();
@@ -274,48 +333,59 @@ public class InventoryListPageController implements Initializable {
             return false;
         }
     }
+
+    //create a TSV/text file
     private boolean saveTSV(File file){
         try{
             Writer writer = new FileWriter(file);
-            PrintWriter dos = new PrintWriter(writer);
+            PrintWriter printWriter = new PrintWriter(writer);
             for(Item item : dataList){
+                // create a tabular format of each item
                 String row = item.getName() + "\t" + item.getSerialNumber() + "\t" + item.getValue();
-                dos.println(row);
+                printWriter.println(row);
             }
             writer.close();
-            dos.close();
+            printWriter.close();
+
             return true;
         }catch (Exception e){
             return false;
         }
     }
+
+    // create a HTML file
     private boolean saveHtml(File file){
         try{
             Writer writer = new FileWriter(file);
-            PrintWriter dos = new PrintWriter(writer);
-            dos.println("<html><body><table>");
+            PrintWriter printWriter = new PrintWriter(writer);
+            printWriter.println("<html><body><table>");
+
             for(Item item : dataList){
-                dos.println("<tr>");
-                dos.print("<td>");
-                dos.print(item.getName());
-                dos.println("</td>");
-                dos.print("<td>");
-                dos.print(item.getSerialNumber());
-                dos.println("</td>");
-                dos.print("<td>");
-                dos.print(item.getValue());
-                dos.println("</td>");
-                dos.println("</tr>");
+
+                printWriter.println("<tr>");
+                printWriter.print("<td>");
+                printWriter.print(item.getName());
+                printWriter.println("</td>");
+                printWriter.print("<td>");
+                printWriter.print(item.getSerialNumber());
+                printWriter.println("</td>");
+                printWriter.print("<td>");
+                printWriter.print(item.getValue());
+                printWriter.println("</td>");
+                printWriter.println("</tr>");
             }
-            dos.println("</table></body></html>");
+            printWriter.println("</table></body></html>");
             writer.close();
-            dos.close();
+            printWriter.close();
             return true;
         }catch (Exception e){
             return false;
         }
     }
     @FXML
+
+    // load item function
+
     public void loadItems() {
         try {
             FileChooser fileChooser = new FileChooser();
@@ -329,8 +399,11 @@ public class InventoryListPageController implements Initializable {
             // Show open file dialog
             File file = fileChooser.showOpenDialog(itemName.getScene().getWindow());
 
+
             if (file != null) {
                 String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0);
+                // see which file type was chosen and display the result accordingly
+
                 if(extension.equals("*.json")){
                     List<Item> itemList = readJson(file);
                     if(itemList != null){
@@ -354,6 +427,9 @@ public class InventoryListPageController implements Initializable {
         } catch (Exception e) {
         }
     }
+
+    // read Json function
+
     private List<Item> readJson(File file){
         try{
             Type listOfMyClassObject = new TypeToken<ArrayList<Item>>() {}.getType();
@@ -365,14 +441,22 @@ public class InventoryListPageController implements Initializable {
             return null;
         }
     }
+
+    // read txt file function
+
     private List<Item> readTSV(File file){
         try{
             List<Item> itemList = new ArrayList<>();
             try (BufferedReader TSVReader = new BufferedReader(new FileReader(file))) {
                 String line = null;
                 while ((line = TSVReader.readLine()) != null) {
+
+                    // spilt the lines when we see a tab
                     String[] lineItems = line.split("\t");
-                    if(lineItems.length != 3) continue;
+
+                    if(lineItems.length != 3)
+                        continue;
+
                     Item item = new Item();
                     item.setName(lineItems[0]);
                     item.setSerialNumber(lineItems[1]);
@@ -384,18 +468,21 @@ public class InventoryListPageController implements Initializable {
                     itemList.add(item);
                 }
             } catch (Exception e) {
-                System.out.println("Something went wrong");
+                System.out.println("Something went wrong when processing your file");
             }
             return itemList;
         }catch (Exception e){
             return null;
         }
     }
+
+    // read HTML function
+
     private List<Item> readHtml(File file){
         try{
             List<Item> itemList = new ArrayList<>();
-            Document doc = Jsoup.parse(file, null);
-            Elements elements = doc.getElementsByTag("tr");
+            Document htmlDocument = Jsoup.parse(file, null);
+            Elements elements = htmlDocument.getElementsByTag("tr");
             for(Element element : elements){
                 Elements rows = element.getElementsByTag("td");
                 Item item = new Item();
