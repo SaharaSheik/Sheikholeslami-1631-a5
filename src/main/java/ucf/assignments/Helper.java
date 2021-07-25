@@ -21,7 +21,7 @@ import javafx.scene.control.Alert;
             alert.showAndWait();
         }
 
-        // show sucess messages
+        // show success messages
         public static void showSuccessAlert(String title, String text){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(title);

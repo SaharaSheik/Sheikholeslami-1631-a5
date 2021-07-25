@@ -51,7 +51,7 @@ public class Item  implements Serializable {
 
     public String getDollarValue(){
 
-        // formatimg the dollar value to 2 decimal
+        // formatting the dollar value to 2 decimal
         return String.format("$%.2f", Value);
     }
 
@@ -59,8 +59,11 @@ public class Item  implements Serializable {
     public boolean equals(Object obj) {
         // this function will check to see if the new item has duplicated serial numbers
 
-        if(obj == null) return false;
-        return serialNumber.equals(((Item)obj).getSerialNumber());
+        if(obj == null)
+            return false;
+
+        return
+                serialNumber.equals(((Item)obj).getSerialNumber());
     }
 
     @Override

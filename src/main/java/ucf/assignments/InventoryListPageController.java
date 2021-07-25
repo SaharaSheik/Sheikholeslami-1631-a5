@@ -159,6 +159,8 @@ public class InventoryListPageController implements Initializable {
         item.setValue(value);
 
         //check if we have the same serial number
+        // I have created a custom compare object method for item so that it only returns false if items share a serial number
+        // an item can have duplicate name and value but not serial number
         if(dataList.contains(item)){
             Helper.showErrorAlert("Error", "You have entered a duplicate Serial Number.\nPlease enter a unique Serial Number");
             return;
