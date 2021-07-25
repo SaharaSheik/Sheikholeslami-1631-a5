@@ -116,4 +116,27 @@ class ItemTest {
         boolean test = equals(item);
         assertFalse(test);
     }
+
+
+    @Test
+    void testToString() {
+
+        //I expect  the Override ToString to return:
+       // "Name: " + itemName + "\n" + "Serial Number: " + itemSerialNumber + "\n" + "Value: " + "$" + itemValue;
+
+        String itemName = "test item";
+        String itemSerialNumber = "1234567890";
+        double itemValue = 45.56;
+
+        item.setName(itemName);
+        item.setSerialNumber(itemSerialNumber);
+        item.setValue(itemValue);
+
+        String test1 = "Name: " + itemName + "\n" + "Serial Number: " + itemSerialNumber + "\n" + "Value: " + "$" + itemValue;
+
+
+        Assertions.assertTrue(test1.equals(item.toString()));
+
+
+    }
 }
