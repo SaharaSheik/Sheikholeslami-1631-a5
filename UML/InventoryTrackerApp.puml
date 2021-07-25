@@ -3,7 +3,7 @@
 
 
 class InventoryTrackerMain{
-   + main(): void
+   + {static} main(): void
    + start(): void
 }
 
@@ -75,19 +75,26 @@ InventoryListPageController parent;
 
 
 class Helper{
-+showErrorAlert(String title, String text): void
++{static}showErrorAlert(String title, String text): void
++{static}showSuccessAlert(String title, String text): void
++{static}itemNameChecker (String Name): boolean
++{static}itemSerialNumberLengthChecker (String serialNumber): boolean
++{static}itemSerialNumberCharAndDigitChecker (String serialNumber): boolean
+
+
+
 
 }
 
 
 
 javafx.Application <|-- InventoryTrackerMain
-InventoryTrackerMain - InventoryListPageController
-java.io.Serializable<|--Item
+InventoryTrackerMain -- InventoryListPageController
 javafx.Initializable<|--InventoryListPageController
 javafx.Initializable<|--EditItemPageController
-Item<-InventoryListPageController
+Item<--InventoryListPageController
 Item<--EditItemPageController
+java.io.Serializable<|--Item
 
 
 InventoryListPageController-EditItemPageController
