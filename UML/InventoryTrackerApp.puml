@@ -21,6 +21,7 @@ class Item{
 + setValue (double value): void
 + equals(Object obj): boolean
 + toString(): String
++ getDollarValue(): String
 }
 
 
