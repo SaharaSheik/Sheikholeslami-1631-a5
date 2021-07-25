@@ -3,7 +3,8 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
  *  Copyright 2021 Sahar Sheikholeslami
  */
-import javafx.collections.FXCollections;
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -111,4 +112,3 @@ public class EditItemPageController implements Initializable {
         stage.close();
     }
 }
-

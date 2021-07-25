@@ -24,7 +24,7 @@ public class InventoryTrackerMain extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // parent root is the Inventort List Page
+        // parent root is the Inventory List Page
         //create a new scene
         //attach the root to the scene
 

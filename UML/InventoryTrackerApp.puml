@@ -1,0 +1,100 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+class InventoryTrackerMain{
+   + main(): void
+   + start(): void
+}
+
+class Item{
+ #String name
+ #String serialNumber
+ #double value
+
++Item()
++ getName() : String
++ setName (String name) : void
++ String getSerialNumber () : String
++ setSerialNumber(String serialNumber) : void
++ getValue (): double
++ setValue (double value): void
++ equals(Object obj): boolean
++ toString(): String
+}
+
+
+class InventoryListPageController {
+-TextField itemName
+-TextField itemSerialNumber
+-TextField itemValue
+-TextField searchItem
+-TableView<Item> itemListView
+-TableColumn<Item, String> colName
+-TableColumn<Item, String> colSerial
+-TableColumn<Item, Double> colValue
+#RadioButton nameRadio
+#RadioButton serialRadio
+#RadioButton valueRadio
+-ObservableList<Item> dataList
+-FilteredList<Item> filteredList
+-SortedList<Item> sortableData
+
++initialize(URL url, ResourceBundle rb): void
+-initTable(): void
++addItem(): void
+-filter(): void
++deleteItem(): void
++editItem(): void
++saveItems(): void
++getItems(): ObservableList<Item>
+-saveJson(File file): boolean
+-saveTSV(File file): boolean
+-saveHTML(File file): boolean
++loadItems(): void
+-readJson (File file): List<Item>
+-readTSV (File file): List<Item>
+-readHTML (File file): List<Item>
+
+}
+
+
+class EditItemPageController {
+
+#TextFiled itemName
+#TextFiled itemSerialNumber
+#TextFiled itemValue
+#Item item
+InventoryListPageController parent;
++initialize(URL url, ResourceBundle resourceBundle): void
++setItem(InventoryListPageController parent, Item item): void
++updateItem() : void
+
+}
+
+
+class Helper{
++showErrorAlert(String title, String text): void
+
+}
+
+
+
+javafx.Application <|-- InventoryTrackerMain
+InventoryTrackerMain - InventoryListPageController
+java.io.Serializable<|--Item
+javafx.Initializable<|--InventoryListPageController
+javafx.Initializable<|--EditItemPageController
+Item<-InventoryListPageController
+Item<--EditItemPageController
+
+
+InventoryListPageController-EditItemPageController
+
+InventoryListPageController-- Helper
+EditItemPageController -- Helper
+
+
+
+
+@enduml

@@ -2,13 +2,13 @@ package ucf.assignments;
 
 /*
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
- *  Copyright 2021 Sahar Sheikholeslami
+ *  Copyright 2021 first_name last_name
  */
+
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
@@ -51,7 +51,6 @@ public class InventoryListPageController implements Initializable {
 
     @FXML
     private TableView<Item> itemListView ;
-
     @FXML private TableColumn<Item, String> colName;
     @FXML private TableColumn<Item, String> colSerial;
     @FXML private TableColumn<Item, Double> colValue;
@@ -70,14 +69,13 @@ public class InventoryListPageController implements Initializable {
     private SortedList<Item> sortableData;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle rb) {
         initTable();
         //add listener for dynamic search
         searchItem.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             filter();
         });
     }
-
     //initialize table view
     private void initTable(){
 
@@ -85,16 +83,14 @@ public class InventoryListPageController implements Initializable {
 
         colName.setCellValueFactory(new PropertyValueFactory<Item, String>("Name"));
         colSerial.setCellValueFactory(new PropertyValueFactory<Item, String>("SerialNumber"));
-        colValue.setCellValueFactory(new PropertyValueFactory<Item, Double>("Value"));
-
-
+        colValue.setCellValueFactory(new PropertyValueFactory<Item, Double>("DollarValue"));
 
         dataList = FXCollections.observableArrayList();
         filteredList = new FilteredList<>(dataList, p -> true);
         sortableData = new SortedList<>(filteredList);
         itemListView.setItems(sortableData);
         sortableData.comparatorProperty().bind(itemListView.comparatorProperty());
-        filteredList.addListener((Observable observable) -> {
+        filteredList.addListener((Observable o) -> {
             Platform.runLater(() -> {
 
             });
