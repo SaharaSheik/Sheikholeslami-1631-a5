@@ -45,4 +45,3 @@ How to run the Inventory Tracker Application
   - User can load items from file by clicking "load items" image at the bottom of the Application.
   - User then chooses the file extension from the file chooser menu.
   - User then finds the file and selects the file they would like to open
-- 

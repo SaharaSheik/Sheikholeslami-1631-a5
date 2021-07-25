@@ -50,7 +50,7 @@ public class Item  implements Serializable {
     public void setValue(double value) {
         // use keyword this. to set the itemValue from InventoryPage GUI
 
-        Value = value;
+        Value = Math.round(value * 100.00) / 100.00;
     }
 
     @Override
