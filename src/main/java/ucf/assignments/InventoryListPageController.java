@@ -319,7 +319,7 @@ public class InventoryListPageController implements Initializable {
     }
 
     //create a Gson file
-    private boolean saveJson(File file){
+    public boolean saveJson(File file){
         try{
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Item>>() {}.getType();
@@ -333,7 +333,7 @@ public class InventoryListPageController implements Initializable {
     }
 
     //create a TSV/text file
-    private boolean saveTSV(File file){
+    public boolean saveTSV(File file){
         try{
             Writer writer = new FileWriter(file);
             PrintWriter printWriter = new PrintWriter(writer);
@@ -352,7 +352,7 @@ public class InventoryListPageController implements Initializable {
     }
 
     // create a HTML file
-    private boolean saveHtml(File file){
+    public boolean saveHtml(File file){
         try{
             Writer writer = new FileWriter(file);
             PrintWriter printWriter = new PrintWriter(writer);
@@ -428,7 +428,7 @@ public class InventoryListPageController implements Initializable {
 
     // read Json function
 
-    private List<Item> readJson(File file){
+    public List<Item> readJson(File file){
         try{
             Type listOfMyClassObject = new TypeToken<ArrayList<Item>>() {}.getType();
             Gson gson = new Gson();
@@ -442,7 +442,7 @@ public class InventoryListPageController implements Initializable {
 
     // read txt file function
 
-    private List<Item> readTSV(File file){
+    public List<Item> readTSV(File file){
         try{
             List<Item> itemList = new ArrayList<>();
             try (BufferedReader TSVReader = new BufferedReader(new FileReader(file))) {
@@ -476,7 +476,7 @@ public class InventoryListPageController implements Initializable {
 
     // read HTML function
 
-    private List<Item> readHtml(File file){
+    public List<Item> readHtml(File file){
         try{
             List<Item> itemList = new ArrayList<>();
             Document htmlDocument = Jsoup.parse(file, null);

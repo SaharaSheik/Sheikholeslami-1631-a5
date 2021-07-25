@@ -49,13 +49,13 @@ class InventoryListPageController {
 +editItem(): void
 +saveItems(): void
 +getItems(): ObservableList<Item>
--saveJson(File file): boolean
--saveTSV(File file): boolean
--saveHTML(File file): boolean
++saveJson(File file): boolean
++saveTSV(File file): boolean
++saveHTML(File file): boolean
 +loadItems(): void
--readJson (File file): List<Item>
--readTSV (File file): List<Item>
--readHTML (File file): List<Item>
++readJson (File file): List<Item>
++readTSV (File file): List<Item>
++readHTML (File file): List<Item>
 
 }
 

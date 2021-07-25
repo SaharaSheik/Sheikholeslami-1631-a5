@@ -24,6 +24,7 @@ public class EditItemPageController implements Initializable {
     TextField itemValue;
 
     Item item;
+    
     InventoryListPageController parent;
 
     @Override
