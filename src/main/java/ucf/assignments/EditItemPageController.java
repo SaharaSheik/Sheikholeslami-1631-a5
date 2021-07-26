@@ -4,6 +4,7 @@ package ucf.assignments;
  *  Copyright 2021 Sahar Sheikholeslami
  */
 
+// edit item uses the same functions from Helper class
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
